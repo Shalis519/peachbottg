@@ -12,9 +12,9 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import FSInputFile
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from .peach_flower import get_peach_flower_info
-from .activation import ACTIVATION_TEXT
-from .days_calculator import format_favorable_days, get_activation_datetimes
+from peach_flower import get_peach_flower_info
+from activation import ACTIVATION_TEXT
+from days_calculator import format_favorable_days, get_activation_datetimes
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
