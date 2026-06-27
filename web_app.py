@@ -1,9 +1,13 @@
 import os
-import asyncio
+import sys
 import threading
+import asyncio
 from flask import Flask
 
-# Импортируем бота из папки bot
+# Ключевая строка: добавляем папку bot в путь поиска
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'bot'))
+
+# Теперь импорт РАБОТАЕТ
 from bot import bot, dp, main
 
 app = Flask(__name__)
@@ -12,16 +16,14 @@ app = Flask(__name__)
 def health_check():
     return "Bot is running!", 200
 
-def run_flask():
-    """Запускает Flask-сервер в отдельном потоке."""
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
+def run_bot():
+    asyncio.run(main())
 
 if __name__ == "__main__":
-    # Запускаем Flask в фоновом потоке
-    flask_thread = threading.Thread(target=run_flask, daemon=True)
-    flask_thread.start()
+    # Запускаем бота в фоновом потоке
+    bot_thread = threading.Thread(target=run_bot, daemon=True)
+    bot_thread.start()
     
-    # Запускаем бота в основном потоке (ГЛАВНОЕ ИЗМЕНЕНИЕ)
-    print("Запуск бота...")
-    asyncio.run(main())  # Теперь бот работает в главном потоке
+    # Запускаем Flask
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
