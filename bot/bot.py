@@ -579,6 +579,16 @@ async def cmd_granted(message: types.Message):
 
 # ───────────────────────── ЗАПУСК (ЕДИНСТВЕННЫЙ ПРАВИЛЬНЫЙ) ────
 
+# ЯВНЫЙ ЭКСПОРТ ДЛЯ WEB_APP.PY
+__all__ = ['bot', 'dp', 'main']
+
+# Убеждаемся, что объекты существуют в глобальной области
+# (они уже созданы в начале файла, но на всякий случай)
+if 'bot' not in globals():
+    bot = Bot(token=BOT_TOKEN)
+if 'dp' not in globals():
+    dp = Dispatcher(storage=MemoryStorage())
+
 async def main():
     """Главная функция запуска бота."""
     logger.info("Бот запущен...")
