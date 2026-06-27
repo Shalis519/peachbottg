@@ -16,6 +16,21 @@ from peach_flower import get_peach_flower_info
 from activation import ACTIVATION_TEXT
 from days_calculator import format_favorable_days, get_activation_datetimes
 
+import asyncio
+import signal
+
+# Отключаем проблемный функционал
+if hasattr(signal, 'set_wakeup_fd'):
+    signal.set_wakeup_fd(-1)
+
+# Или используйте этот хак
+import sys
+if sys.platform != 'win32':
+    try:
+        signal.set_wakeup_fd(-1)
+    except:
+        pass
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
