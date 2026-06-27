@@ -4,4 +4,3 @@ lunar-python==1.4.8
 pytz==2024.1
 requests==2.34.2
 flask==3.0.3
-pydantic-core==2.18.4
