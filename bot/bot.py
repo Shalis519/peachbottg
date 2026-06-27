@@ -25,6 +25,7 @@ if not BOT_TOKEN:
 
 OWNER_USERNAME = "astrosista"
 
+# ⬇️ ЭТО ЕДИНСТВЕННОЕ ПРАВИЛЬНОЕ СОЗДАНИЕ bot и dp
 bot = Bot(token=BOT_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
@@ -576,12 +577,14 @@ async def cmd_granted(message: types.Message):
     await message.answer(f"👥 Пользователи с доступом:\n{ids}", parse_mode="HTML")
 
 
-# ───────────────────────── Запуск ────────────────────────────────
+# ───────────────────────── ЗАПУСК (ЕДИНСТВЕННЫЙ ПРАВИЛЬНЫЙ) ────
 
 async def main():
+    """Главная функция запуска бота."""
     logger.info("Бот запущен...")
     await dp.start_polling(bot)
 
 
+# ⬇️ ЭТО ДЛЯ ЛОКАЛЬНОГО ЗАПУСКА (НЕ ТРОГАТЬ!)
 if __name__ == "__main__":
     asyncio.run(main())
